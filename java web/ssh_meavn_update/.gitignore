@@ -1,0 +1,6 @@
+# MEAVN #
+target/
+
+# IDEA #
+*.iml
+.idea/
