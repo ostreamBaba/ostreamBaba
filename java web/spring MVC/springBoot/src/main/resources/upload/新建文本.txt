@@ -1,0 +1,28 @@
+<bean id="userDaoSSHI" class="com.ssh.Dao.UserDaoImpll">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="userServiceI" class="com.ssh.service.UserServiceImpl">
+        <property name="userDao" ref="userDaoSSHI"/>
+    </bean>
+
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="configLocation" value="classpath:/config/hibernate.cfg.xml"/>
+    </bean>
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="userDaoSSH" class="com.ssh.Dao.UserDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+
+    <bean id="userService" class="com.ssh.service.UserServiceImpl">
+        <property name="userDao" ref="userDaoSSH"/>
+    </bean>
+
+    <bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="txManager"/>
