@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--不使用hibernate.cfg.xml-->
+
+    <context:property-placeholder location="classpath:config/C3p0-db.properties"/>
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${database.driverClassName}"></property>
+        <property name="jdbcUrl" value="${database.url}"></property>
+        <property name="user" value="${database.username}"></property>
+        <property name="password" value="${database.password}"></property>
+    </bean>
+
+    <!--配置sessionFactory-->
+    <bean id="sessionFactoryI" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">
+                    org.hibernate.dialect.MySQL5Dialect
+                </prop>
+                <prop key="hibernate.show_sql">
+                    true
+                </prop>
+                <prop key="hibernate.format_sql">
+                    true
+                </prop>
+                <prop key="hbm2ddl.auto">update</prop>
+                <prop key="javax.persistence.validation.mode">none</prop>
+                <prop key="hibernate.current_session_context_class">
+                    thread
+                </prop>
+            </props>
+        </property>
+        <!--配置映射文件-->
+        <property name="mappingResources" value="com/ssh/entity/User.hbm.xml" />
+    </bean>
+
+    <bean id="userDaoSSHI" class="com.ssh.dao.UserDaoImpll">
+        <property name="sessionFactory" ref="sessionFactoryI"/>
+    </bean>
+
+    <bean id="userServiceI" class="com.ssh.service.UserServiceImpl">
+        <property name="userDao" ref="userDaoSSHI"/>
+    </bean>
+
+    <bean id="userAction" class="com.ssh.action.UserAction">
+        <property name="userService" ref="userServiceI"/>
+    </bean>
+
+
+    <!--使用hibernate.cfg.xml-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="configLocation" value="classpath:/config/hibernate.cfg.xml"/>
+    </bean>
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="userDaoSSH" class="com.ssh.dao.UserDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+
+    <bean id="userService" class="com.ssh.service.UserServiceImpl">
+        <property name="userDao" ref="userDaoSSH"/>
+    </bean>
+
+    <bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+
+</beans>

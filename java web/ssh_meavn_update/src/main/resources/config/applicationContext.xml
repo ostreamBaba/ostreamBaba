@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--将指定对象给spring,让其创建实例-->
+    <bean id="userDao2" class="com.ioc.dao.UserDaoImpl"/>
+    <!--注册一个叫做userService的实例-->
+    <bean id="userService" class="com.ioc.service.UserServiceImpl">
+        <!--将userDao实例注入到userService中-->
+        <property name="userDao" ref="userDao2"/>
+    </bean>
+
+
+    <bean id="bean1" class="com.ioc.dao.bean1" scope="prototype"/>
+    <bean id="bean2" class="com.ioc.dao.MyBean2Factory" factory-method="createBean"/>
+    <bean id="myBean3Factory" class="com.ioc.dao.MyBean3Factory"/>
+    <bean id="bean3" factory-bean="myBean3Factory" factory-method="createBean"/>
+    <bean id="bean5" class="com.ioc.dao.bean1" scope="singleton"/>
+
+    <!--这样配置过于臃肿-->
+    <!--构造方法装配user实例-->
+    <bean id="user1" class="com.ioc.dao.User">
+        <constructor-arg index="0" value="jack"/>
+        <constructor-arg index="1" value="1234"/>
+    </bean>
+    <!--set装配user实例-->
+    <bean id="user2" class="com.ioc.dao.User">
+        <property name="username" value="tom"/>
+        <property name="password" value="1231"/>
+    </bean>
+
+</beans>

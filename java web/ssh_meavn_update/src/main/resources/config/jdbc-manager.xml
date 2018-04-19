@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.2.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+
+    <context:property-placeholder location="classpath:db.properties" />
+    <!--配置数据源-->
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${database.driverClassName}"></property>
+        <property name="url" value="${database.url}"></property>
+        <property name="username" value="${database.username}"></property>
+        <property name="password" value="${database.password}"></property>
+    </bean>
+    <!--配置jdbc模板-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <!--默认必须使用的数据源-->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="accoutDao" class="com.jdbc.Dao.AccountDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    <!--配置service-->
+    <bean id="accountService" class="com.jdbc.service.AccountDaoServiceImpl">
+        <property name="accountDao" ref="accoutDao"/>
+    </bean>
+
+    <!-- 事务管理器 依赖于数据源-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--1-->
+    <!--注册事物管理驱动-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!--2-->
+    <!--生成代理类 让代理事物管理 依赖于事务管理器-->
+    <bean id="accountServiceProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <!--提供事务管理器-->
+        <property name="transactionManager" ref="transactionManager"/>
+        <!--目标类-->
+        <property name="target" ref="accountService"/>
+        <!--提供接口-->
+        <property name="proxyInterfaces" value="com.jdbc.service.AccountDaoService"/>
+        <!--事务的详细配置-->
+        <property name="transactionAttributes">
+            <props>
+                <prop key="*">PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ</prop>
+            </props>
+        </property>
+    </bean>
+    <!--缺点：过于臃肿-->
+
+    <!--tx/AOP-->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--编写通知：对事物进行增强 通知-->
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <!--name:方法名称 *表示任意方法名称
+            propagation表示设置传播行为
+            isolation表示隔离级别-->
+            <tx:method name="*" propagation="REQUIRED" isolation="DEFAULT" read-only="false"/>
+        </tx:attributes>
+    </tx:advice>
+    <!--aop编写 r让spring自动对生产目标生成代理-->
+    <aop:config>
+        <!--切入点-->
+        <aop:pointcut id="txPointCut" expression="execution(* com.jdbc.service..*.*(..))"/>
+        <!--切面：将切入点与通知整合-->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>
+    </aop:config>
+
+
+</beans>

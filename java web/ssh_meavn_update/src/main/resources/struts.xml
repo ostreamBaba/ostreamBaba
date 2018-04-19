@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+    <!--高版本struts2需要设置才可以访问类的静态方法-->
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+    <!-- 指定全局国际化资源文件 -->
+    <constant name="struts.custom.i18n.resources" value="mess"/>
+    <!-- 指定国际化编码所使用的字符集 -->
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <!--开发模式-->
+    <constant name="struts.devMode" value="true"/>
+
+    <constant name="struts.objectFactory" value="spring" />
+
+    <!--struts自身建立userAction实例 spring建立的userAction实例都可以-->
+    <package name="ssh" namespace="/" extends="struts-default">
+        <action name="userAction_*" class="com.ssh.action.UserAction" method="{1}">
+            <result name="success">/ssh/success.jsp</result>
+            <allowed-methods>add</allowed-methods>
+        </action>
+    </package>
+
+    <!--文件上传-->
+    <package name="upload" namespace="/" extends="struts-default">
+        <action name="fileUpload" class="com.viscu.action.FileUpLoadAction">
+            <result name="success">/view/upload/result.jsp</result>
+            <result name="input">/view/upload/fileUpLoad.jsp</result>
+            <interceptor-ref name="defaultStack">
+                <param name="fileUpload.maximumSize">4194304</param>
+                <param name="fileUpload.allowedExtensions">
+                    .txt,.doc,.jpg
+                </param>
+                <param name="fileUpload.allowedTypes">
+                    text/plain,application/msword,image/jpeg
+                </param>
+            </interceptor-ref>
+        </action>
+    </package>
+
+    <!--文件文件下载-->
+    <package name="download" namespace="/" extends="struts-default" >
+
+        <!--指定文件下载-->
+        <action name="simpledownload" class="com.viscu.action.DownloadAction">
+            <result type="stream">
+                <param name="contentType">text/plain</param>
+                <param name="contentDisposition">
+                    attenchment;filename="struts.txt";filename*=utf-8''${file}
+                </param>
+                <param name="inputName">downloadFile</param>
+            </result>
+        </action>
+
+        <!--任意文件下载-->
+        <action name="noSimpledownload" class="com.viscu.action.FileDownloadAction">
+            <result type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">
+                    attachment;filename="${file}";filename*=utf-8''${file}
+                </param>
+                <param name="inputName">download</param>
+            </result>
+        </action>
+
+        <!--任意文件下载-->
+        <action name="noSimpledownloadto" class="com.viscu.action.FileDownloadtoAction">
+            <result type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">
+                    attachment;filename="${file}"
+                </param>
+                <param name="inputName">download</param>
+            </result>
+        </action>
+
+    </package>
+
+    <package name="user" namespace="/" extends="struts-default">
+
+        <action name="userLogin" class="userAction">
+            <result name="success">/success.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+
+    </package>
+
+    <package name="default" namespace="/" extends="struts-default">
+        <!--声明拦截器-->
+        <interceptors>
+            <interceptor name="privivlege"
+                         class="com.viscu.interceptor.PrivilegeInterceptor">
+            </interceptor>
+            <interceptor-stack name="myStack">
+                <interceptor-ref name="privivlege"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+        <!--值栈-->
+        <action name="valueStack" class="com.viscu.ognl.ValueStackAction">
+            <result>/view/ognl/index.jsp</result>
+        </action>
+        <action name="valueStack2" class="com.viscu.action.ValueStackAction">
+            <result>/view/ognl/valueStack2.jsp</result>
+        </action>
+        <action name="valueStack3" class="com.viscu.action.ValueStack2Action">
+            <result>/view/ognl/valueStack2.jsp</result>
+        </action>
+
+        <!--用户登录操作-->
+        <action name="login" class="com.viscu.action.LoginAction">
+            <result>/view/main.jsp</result>
+            <result name="input">/view/login.jsp</result>
+        </action>
+        <action name="book_*" class="com.viscu.action.BookAction" method="{1}">
+            <result>/view/success.jsp</result>
+            <result name="login">/view/login.jsp</result>
+            <interceptor-ref name="myStack"/>
+        </action>
+    </package>
+
+
+
+
+</struts>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+    <!--目标类-->
+    <bean id="userDao" class="com.proxy.dao.UserDaoImpl"/>
+    <!--通知service-->
+    <bean id="myAspect" class="com.proxy.jdk.MyAspect2"/>
+    <!--生成代理对象-->
+    <bean id="userDaoProxy"
+          class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!--代理实现的接口-->
+        <property name="interfaces" value="com.proxy.dao.UserDao"/>
+        <!--目标-->
+        <property name="target" ref="userDao"/>
+        <!--通知增强目标-->
+        <property name="interceptorNames" value="myAspect"/>
+        <!--true: cglib代理 false: jdk代理-->
+        <property name="proxyTargetClass" value="true"/>
+    </bean>
+
+</beans>

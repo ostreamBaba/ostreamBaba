@@ -1,0 +1,178 @@
+a{ text-decoration: none;}
+li{list-style-type:none;}
+span.loginColor{color: cornflowerblue;}
+span.regColor{color: #cccccc}
+.Header{
+    background-color: #eeeeee;
+    color: #999999;
+    font-size: 20px;
+    border: 1px solid gainsboro;
+}
+.imgP1{
+    border-right: 1px solid black;
+    margin-left: 250px;
+    margin-top: 20px;
+}
+.login{
+    color: black;
+    font-size: 30px;
+    position: absolute;
+    left: 550px;
+    top: 45px;
+}
+.registerBox{
+    border: 1px solid grey;
+    margin-top: 25px;
+    height: 1200px;
+    width: 100%;
+    background-image: none;
+    background-color: #eeeeee;
+}
+
+.registerBox .box{
+    margin-left: 15%;
+    margin-top: 5%;
+    width: 70%;
+    height: 90%;
+    background-color: white;
+}
+.registerBox .box .text1{
+    color: black;
+    font-size: 20px;
+    padding-left: 100px;
+    padding-top: 100px;
+    padding-bottom: 20px;
+}
+
+.registerBox .box .spanA{
+    margin-left: 210px;
+}
+
+.registerBox .box .spanB{
+    margin-left: 194px;
+}
+
+.registerBox .box .spanC{
+    margin-left: 251px;
+}
+
+.registerBox .box .spanD{
+    margin-left: 242px;
+}
+
+.registerBox .box .spanE{
+    color: grey;
+    margin-left: 5px;
+    letter-spacing: 3px;
+    font-size: 6px;
+}
+
+.registerBox .box .boxPos{
+    margin-left: 40px;
+    margin-top: 18px;
+    width: 300px;
+    height: 30px;
+    border-radius: 2px;
+}
+
+.registerBox .box .dressPosA{
+    margin-left: 40px;
+    margin-top: 18px;
+    width: 100px;
+    height: 30px;
+    border-radius: 2px;
+}
+
+.registerBox .box .dressPosB{
+    margin-left: 5px;
+    margin-top: 18px;
+    width: 100px;
+    height: 30px;
+    border-radius: 2px;
+}
+
+.registerBox .box .dressPosC{
+    margin-left: 5px;
+    margin-top: 18px;
+    width: 300px;
+    height: 30px;
+    border-radius: 2px;
+}
+
+.registerBox .box .checkBox{
+    margin-top: 5%;
+    margin-left: 270px;
+    background-color: orange;
+}
+.registerBox .box .checkBoxFont{
+    margin-left: 29px;
+    color: #cccccc;
+    font-size: 15px;
+}
+.registerBox .box .buttonBox{
+    margin-top: 7%;
+    margin-left: 41%;
+    width: 125px;
+    height: 40px;
+    background-color: orange;
+    color: white;
+    padding: 2px;
+    border-radius: 5px;
+}
+.registerBox .box .A{
+    margin-top: 5%;
+    margin-left: 35%;
+}
+
+footer{
+    background-color: white;
+    color: #cccccc;
+}
+footer .up{
+    padding-left: 30%;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+footer .up1{
+    float: left;
+    margin-right: 80px;
+    padding-right: 80px;
+    border-right: 2px solid grey;
+}
+footer .up2{
+    float: left;
+    margin-right: 80px;
+    padding-right: 80px;
+}
+footer .span{
+    color: gray;
+    margin-left: 12px;
+    padding-top: 10px;
+    font-size: 20px;
+    float: right;
+}
+
+footer .down{
+    width:100%;
+}
+footer .down .left{
+    margin-left: 200px ;
+    margin-top: 50px;
+    height:90px;
+    width: 861px;
+    border-right: 2px solid grey;
+    font-size: 10px;
+    text-align: center;
+}
+footer .down .left li{
+    display: inline-block;
+}
+footer .down .right {
+    float: right;
+    margin-top: -60px;
+    margin-right: 550px;
+}
+
+footer .down .right img{
+    margin: 10px;
+}
