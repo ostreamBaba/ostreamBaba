@@ -8,3 +8,7 @@
 * thinking_in_java java基础知识的学习
 
 
+## 技能: 熟悉git的基本操作(get)
+
+* 使用git也是为了熟练掌握该技能和对一些markdown语法的学习
+
