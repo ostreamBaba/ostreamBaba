@@ -3,7 +3,7 @@
 <table>
   <ul>
     <li>WhoCalled</li>
-	<li>LostMessage<li>
+	<li>LostMessage</li>
     <li>readme.md</li>
   </ul>
 </table>
