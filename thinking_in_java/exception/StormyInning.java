@@ -14,12 +14,13 @@ class Strike extends BaseballException{}
 abstract class Inning{
     //声明可能抛出异常 实际上并没有抛出
     public Inning() throws BaseballException{  //强制用户去捕获可能在覆盖后的event版本中增加的异常
+        //throw new BaseballException();
     }
     public void event()throws BaseballException{
 
     }
     public void eventPlus()throws BaseballException{
-
+        throw new BaseballException();
     }
     public abstract void atBat()throws Foul,Strike;
     public void walk(){}
@@ -38,6 +39,7 @@ interface Storm{
 public class StormyInning extends Inning implements Storm{
     //构造器可以抛出任何异常 但必须包含基类构造器的异常说明
     public StormyInning() throws BaseballException, RaineOut{
+        //throw new BaseballException();
     }
     public StormyInning(String s) throws BaseballException, Foul{
     }
@@ -58,7 +60,8 @@ public class StormyInning extends Inning implements Storm{
     //PopFoul异常是Foul派生出来的 异常处理程序也能捕获到PopFoul异常
     @Override
     public void atBat() throws PopFoul{
-
+        /*System.out.println("caught PopFoul Exception");
+        throw new PopFoul();*/
     }
     //由于Storm定义了event方法 抛出了新的异常
     //如果在StormInning类即实现Inning中的event又实现storm中的event 那么storm的event既不能改变在Inning中event方法中的异常接口
@@ -68,7 +71,7 @@ public class StormyInning extends Inning implements Storm{
     }
     @Override
     public void eventPlus() throws BaseballException {
-        super.eventPlus();
+        //super.eventPlus();
     }
 
     public static void main(String[] args) {
@@ -77,6 +80,7 @@ public class StormyInning extends Inning implements Storm{
         try{
             StormyInning si=new StormyInning();
             si.atBat();
+            si.eventPlus();
         }catch (PopFoul e){
             System.out.println("Pop Foul");
         }catch (BaseballException e){
@@ -100,7 +104,10 @@ public class StormyInning extends Inning implements Storm{
         } catch (BaseballException e){
             System.out.println("Generic baseball exception");
         }
-
     }
+
+    //eg: StormInning的方法抛出异常
+    //第一个try块捕捉到PopFoul异常
+    //第二个try块 由于PopFoul是继承Foul异常 所以会捕获到Foul异常
 
 }
