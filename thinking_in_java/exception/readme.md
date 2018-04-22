@@ -10,5 +10,5 @@
 > 被检查的异常 检查到的异常被吞食
 * [MainException](https://github.com/ostreamBaba/machine-learning_ostreamBa/blob/master/thinking_in_java/exception/MainException.java)
 > 将异常传递给控制台 或者直接把"被检查的异常"包装进RuntimeException里面
-* [TurnChecking](https://github.com/ostreamBaba/machine-learning_ostreamBa/blob/master/thinking_in_java/exception/TurnChecking.java)
+* [TurnOffChecking](https://github.com/ostreamBaba/machine-learning_ostreamBa/blob/master/thinking_in_java/exception/TurnOffChecking.java)
 > 捕获多种异常并包装进RuntimeException对象里
