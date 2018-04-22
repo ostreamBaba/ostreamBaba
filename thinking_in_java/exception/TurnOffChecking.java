@@ -44,11 +44,11 @@ public class TurnOffChecking {
                     System.out.println("ffe: "+e);
                 }catch (IOException e){
                     System.out.println("ie: "+e);
-                }catch (Throwable e){
+                } catch (Throwable e){  //恩恩看到这里可能你会有点疑惑 解释一下你用了getCause()，这个方法会抛出Throwable的异常，所以你需要catch这个异常，
+                    // 并且Throwable是Exception的父类，所以thinking in java里面的抛出的RuntimeException异常能在catch(Throwable e){}这里捕获到。
                     System.out.println("throwable: "+e);
                 }
             }
         }
     }
-
 }
