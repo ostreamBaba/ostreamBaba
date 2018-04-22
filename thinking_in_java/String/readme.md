@@ -11,6 +11,6 @@
 
 ### 正则表达式 ###
 
-[IntegerMatch]https://github.com/ostreamBaba/ostreamBaba/blob/master/thinking_in_java/String/IntegerMatch.java
+[IntegerMatch](https://github.com/ostreamBaba/ostreamBaba/blob/master/thinking_in_java/String/IntegerMatch.java)
 
 [Rudolph](https://github.com/ostreamBaba/ostreamBaba/blob/master/thinking_in_java/String/Rudolph.java)
