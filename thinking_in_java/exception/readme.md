@@ -1,18 +1,11 @@
 ## 异常处理 ##
 
-<table>
-  <ul>
-    <li>WhoCalled</li>
-	<li>LostMessage</li>
-	<li>StormInning</li>
-    <li>readme.md</li>
-
-  </ul>
-</table>
-
-```javascript
-WhoCalled: 打印栈轨迹
-LostMessage: 异常丢失
-StormInning: 异常的限制
-```
+* [WhoCalled](https://github.com/ostreamBaba/machine-learning_ostreamBa/blob/master/thinking_in_java/exception/WhoCalled.java)
+> 打印栈轨迹
+* [LostMessage](https://github.com/ostreamBaba/machine-learning_ostreamBa/blob/master/thinking_in_java/exception/LostMessage.java)
+> 异常丢失
+* [StormInning](https://github.com/ostreamBaba/machine-learning_ostreamBa/blob/master/thinking_in_java/exception/StormyInning.java)
+> 异常的限制
+* [MyExcepthion](https://github.com/ostreamBaba/machine-learning_ostreamBa/blob/master/thinking_in_java/exception/MyException.java)
+> 被检查的异常 检查到的异常被吞食
 
