@@ -3,7 +3,7 @@
 
 ## PECS原则(Producer Extends Consumer Super)
 
-* 频繁往外读取内容名 适合上界extends
+* 频繁往外读取内容 适合上界extends
 * 经常往里插入的 适合下界Super
 
 ### <? extend T>和<? super T>
