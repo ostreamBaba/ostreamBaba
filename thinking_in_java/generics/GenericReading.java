@@ -20,6 +20,7 @@ import java.util.List;
  */
 
 public class GenericReading {
+    //静态泛型泛法能够奏效 那么当只是读取时 就不需要协变了
     static <T> T readExact(List<T> list){
         return list.get(0);
     }
@@ -31,13 +32,15 @@ public class GenericReading {
         f=readExact(sonList);
         System.out.println(f+"\n"+s);
     }
+
+    //泛型类
     static class Reader<T>{
        T readExact(List<T> list){
            return list.get(0);
        }
     }
     static void f2(){
-        Reader<Father> fatherReader=new Reader<Father>();//只能存入father类的list
+        Reader<Father> fatherReader=new Reader<Father>();//只能读取father类的list
         Father f=fatherReader.readExact(fatherList);
         //! f=fatherReader.readExact(sonList);  //error
     }
