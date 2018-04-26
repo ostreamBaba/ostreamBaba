@@ -14,7 +14,7 @@
 * 带有super超类型限定的通配符可以向泛型对象中写入，带有extends子类型限定的通配符可以向泛型对象读取
 
 ## 逆变(P363书中的疑惑)
-- [关于java编程思想P363的疑惑一些见解](https://blog.csdn.net/Viscu/article/details/80096675)
+- [关于java编程思想P393的疑惑一些见解](https://blog.csdn.net/Viscu/article/details/80096675)
 
 参考： 
 - [Java中<? extends T>和<? super T>的理解](https://blog.csdn.net/jdsjlzx/article/details/70479227)
