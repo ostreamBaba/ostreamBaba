@@ -7,6 +7,8 @@
 * think_Practice 坦克大战(之后会进行修改)
 * thinking_in_java java基础知识的学习
 
+> [关于java编程思想中文版的一些错误](https://book.douban.com/review/7803218/)
+
 
 ## 技能: 熟悉git的基本操作(get)
 
