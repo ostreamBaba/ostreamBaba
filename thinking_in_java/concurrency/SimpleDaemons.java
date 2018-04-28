@@ -22,7 +22,7 @@ public class SimpleDaemons implements Runnable{
             System.err.println("interrupted");
         }
     }
-
+    //建立了显示的线程 以便设置他们的后台标志
     public static void main(String[] args) throws InterruptedException {
         for (int i = 0; i < 10; i++) {
             Thread daemon=new Thread(new SimpleDaemons());
