@@ -1,7 +1,5 @@
 package com.ostream.ThinkingInJavaII.concurrency;
 
-
-
 import java.util.concurrent.TimeUnit;
 
 /**
