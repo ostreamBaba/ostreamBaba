@@ -56,6 +56,7 @@ class SerialNumberGenerator{
     private static volatile int serialNumber=0;
     public static /*synchronized*/ int nextSerialNumber(){  //这里会造成多个任务同时访问(并且涉及一个读操作和一个写操作)
         return serialNumber++;  //not Thread-safe (java递增不是原子性操作)
+        //serialNumber++其实有两个操作 先赋旧值 再进行递增操作 这个过程不具备原子性 若其他线程仍旧可以直接访问这个不稳定的对象 所以出现了重复的序列号
     }
 }
 class CircularSet{
