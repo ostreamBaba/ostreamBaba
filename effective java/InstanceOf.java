@@ -1,8 +1,10 @@
 package com.ostream.effective_java;
 
 import com.sun.org.apache.regexp.internal.RE;
+import org.junit.Test;
 
 import java.awt.*;
+import java.lang.Comparable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -28,7 +30,7 @@ public class InstanceOf {
 //一致性
 //非空性
 
-final class CaseInsensitiveString{
+final class CaseInsensitiveString implements Comparable<CaseInsensitiveString>{
     private final String s;
     public CaseInsensitiveString(String s) {
         if(null==s){
@@ -47,6 +49,11 @@ final class CaseInsensitiveString{
         }
         return false;*/
         return (o instanceof CaseInsensitiveString)&&(s.equalsIgnoreCase(((CaseInsensitiveString) o).s));//符合对称性
+    }
+
+    @Override
+    public int compareTo(CaseInsensitiveString cis) {
+        return String.CASE_INSENSITIVE_ORDER.compare(s,cis.s);
     }
 
     public static void main(String[] args) {
@@ -198,3 +205,5 @@ class ColorPoint1{
 
 //基本类型用== 对象引用域递归地用equal float域用Float.compare Double域用Double.compare
 //数组域可以用Arrays.equals方法
+
+
