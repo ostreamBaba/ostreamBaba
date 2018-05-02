@@ -45,7 +45,8 @@ public class Stack implements Cloneable{
     public Stack clone(){
         try{
             Stack result=(Stack)super.clone();
-            result.elements=elements.clone(); //在数组上调用clone返回的数组 其编译时类型与被克隆的类型与被克隆数组的类型相同
+            result.elements=elements.clone(); //在数组上调用clone返回的数组 其编译时类型与被克隆数组的类型相同
+            //这样做克隆数组产生变化不会影响到被克隆数组
             return result;
         }catch (CloneNotSupportedException e){
             throw new AssertionError();
