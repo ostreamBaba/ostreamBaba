@@ -1,5 +1,8 @@
 package com.ostream.effective_java;
 
+import com.sun.xml.internal.ws.policy.spi.AssertionCreationException;
+
+import java.lang.Comparable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +12,7 @@ import java.util.Map;
  */
 
 //覆盖equals始终是要覆盖hashCode
-public class PhoneNumber {
+public class PhoneNumber implements Comparable<PhoneNumber>{
     private volatile int hashCode;
     private final short areaCode;
     private final short prefix;
@@ -71,8 +74,48 @@ public class PhoneNumber {
         return String.format("(%03d)%03d-%04d",areaCode,prefix,lineNumber);
     }
 
+    //协变返回类型
+    //目前覆盖方法的返回类型可以是别覆盖方法的返回类型的子类了
+    @Override
+    public PhoneNumber clone(){
+        try{
+            return (PhoneNumber) super.clone();
+        }catch (CloneNotSupportedException e){
+            throw new AssertionError();
+        }
+    }
+
+    @Override
+    public int compareTo(PhoneNumber phoneNumber) {
+        //return areaCode<phoneNumber.areaCode?-1:(areaCode==phoneNumber.areaCode?0:-1);
+        /*int areacodeDiff=areaCode-phoneNumber.areaCode;
+        //注意溢出
+        if(areacodeDiff!=0){
+            return areacodeDiff;
+        }*/
+        if(areaCode<phoneNumber.areaCode){
+            return -1;
+        }
+        if(areaCode>phoneNumber.areaCode){
+            return 1;
+        }
+        if(prefix<phoneNumber.prefix){
+            return -1;
+        }
+        if(prefix>phoneNumber.prefix){
+            return 1;
+        }
+        if(lineNumber<phoneNumber.lineNumber){
+            return -1;
+        }
+        if(lineNumber>phoneNumber.lineNumber){
+            return 1;
+        }
+        return 0;
+    }
+
     public static void main(String[] args) {
-        Map<PhoneNumber,String> m=new HashMap<PhoneNumber, String>();
+        Map<PhoneNumber,String> m=new HashMap<PhoneNumber,String>();
         /*PhoneNumber pn=new PhoneNumber(333,444,5678);
         m.put(pn,"fuck");
         System.out.println(m.get(pn));*/
@@ -81,7 +124,6 @@ public class PhoneNumber {
         System.out.println(m.get(new PhoneNumber(444,333,5678)));
         PhoneNumber pn=new PhoneNumber(333,444,5678);
         System.out.println(pn);
-
     }
 }
 
