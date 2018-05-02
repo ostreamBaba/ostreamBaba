@@ -9,7 +9,7 @@ import java.util.EmptyStackException;
  */
 
 //消除过期的对象引用
-public class Stack {
+public class Stack implements Cloneable{
     private Object[] elements;
     private int size=0;
     private static final int DEFAULT_INITIAL_CAPACITY=16;
@@ -35,10 +35,38 @@ public class Stack {
         elements[size]=null;
         return result;
     }
+
+    //clone 若对象中包含的域包含了可变的对象 就不能简单的clone了
+    //size域具有正确的值 但是elements域将引用与原始Stack实例相同的数组
+    //修改原始实例会破坏被克隆对象中的约束条件
+    //clone方法就是另外一个构造器 你必须确保它不会伤害到原始对象 并确保正确地创建被约束对象中的约束条件
+    //若elements域是final的话 那么上述方案就不能正常的工作了(clone方法是被禁止给elements域赋新值的)
+    @Override
+    public Stack clone(){
+        try{
+            Stack result=(Stack)super.clone();
+            result.elements=elements.clone(); //在数组上调用clone返回的数组 其编译时类型与被克隆的类型与被克隆数组的类型相同
+            return result;
+        }catch (CloneNotSupportedException e){
+            throw new AssertionError();
+        }
+    }
     private void ensureCapacity(){
         if(elements.length==size){
             elements=Arrays.copyOf(elements,size*2+1);
         }
     }
 
+    public static void main(String[] args) {
+        Stack s1=new Stack();
+        //Stack s2=s1.clone();
+        s1.push(1);
+        s1.push("123");
+        //System.out.println(s1.pop());
+        Stack s2=s1.clone();
+        System.out.println(s2.pop());
+        s2.push("456");
+        //若不调用elements的clone的话
+        //s2对elements的操作将影响到s1的elements域(不会影响到size域)
+    }
 }
