@@ -19,7 +19,7 @@ public class RefenenceCountingGC {
         objA = null;//obj1不再指向RefenenceCountingGC实例1,其引用计数减1,结果为1.
         objB = null;//obj2不再指向RefenenceCountingGC实例2,其引用计数减1,结果为1.
         //若java虚拟机用的是计数算法 那么RefenenceCountingGC实例1 RefenenceCountingGC实例2都不会被回收
-        //可是根据下面的GC日志 [PSYoungGen: 888K->0K(36864K)] [ParOldGen: 0K->799K(84992K)] 888K->799K(121856K)(被回收) 所以java垃圾回收机制用的不是该方法
+        //可是根据下面的GC日志 [PSYoungGen: 888K->0K(36864K)] [ParOldGen: 0K->799K(84992K)] 888K->799K(121856K)(被回收) 所以jvm并不是通过计数算法来判断对象是否存活
         System.gc();
     }
 
