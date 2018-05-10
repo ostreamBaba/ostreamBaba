@@ -27,8 +27,8 @@
 
 ### 深入理解java虚拟机(在读中)
 
-### 深入理解java的内存(已读)	
-- [ ]happens-before规则
-- [ ]volatile的内存语义
-- [ ]锁的内存语义
-- [ ]final域的内存义
+### 深入理解java的内存(已读 仅仅列出重点部分)	
+- [ ] happens-before规则
+- [ ] volatile的内存语义
+- [ ] 锁的内存语义
+- [ ] final域的内存义
