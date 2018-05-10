@@ -15,6 +15,8 @@ class CheesyCounter{
     public synchronized int increment(){
         return value++;
     }
+	
+	//....
 }
 
 ```
