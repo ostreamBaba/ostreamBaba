@@ -15,6 +15,7 @@
 int ByteLen=1024*1024*2;
 Byte[]=new Byte[Bytelen]; 
 ```
+
 经常会出现大对象容易导致内存还有不少的空间时就触发GC以获取足够的连续空间来“安置”它们
 设置-XX:PertenureSizeThreshold参数可以令大于这个设置值的对象直接在老年代分配
 这样子做的目的是避免在Eden区以及两个Survivor区之间发生大量的内存复制(仅对Serial和ParNew有效)
