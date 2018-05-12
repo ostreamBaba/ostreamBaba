@@ -23,7 +23,7 @@ class LoggingWeight extends Wight{
 
 
 //内部锁synchronized的可重进入特性
-class Someclass {
+class SomeClass {
     private static final Object LCK_OBJ = new Object();
 
     public void method1() {
@@ -39,7 +39,7 @@ class Someclass {
         }
     }
     public static void main(String[] args) {
-        Someclass sc = new Someclass();
+        SomeClass sc = new SomeClass();
         sc.method1();
     }
 }
