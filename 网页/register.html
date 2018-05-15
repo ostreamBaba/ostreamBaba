@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册界面</title>
+    <style>
+        /*清除浮动 待了解*/
+        。clearfix：after{
+            visibility: hidden;
+            display: block;
+            content: " ";
+            clear: both;
+            height: 0;
+        }
+        .clearfix{
+            display: inline-table; /* Hides from IE-mac */
+        }
+        * html .clearfix{
+            height: 1%;
+        }
+        .clearfix{
+            display: block;
+        }
+
+        body{
+            padding: 0;
+            font-family: 微软雅黑;
+            font-size: 14px;
+            margin: 0;
+        }
+        .fl{float: left}
+        .fr{float: right}
+        a{
+            color: #ffffff;
+            text-decoration: none;
+        }
+        ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        img{
+            border: none;
+        }
+
+        /*注册页面 head部分*/
+
+        .register_header{
+            width: 100%;
+            height: 5%;
+            position: absolute;
+            background-color: #eeeeee;
+        }
+
+        .register_header h2{
+            margin: 0px;
+            padding: 5px 35px;
+            color: mediumslateblue;
+            text-shadow: 2px 2px 1px black;
+        }
+
+        .register_main_body{
+            top: 5%;
+            width:100%;
+            height: 80%;
+            position: absolute;
+            border-top: 1px solid grey;
+            background-color: #eeeeee;
+
+        }
+
+        .back_to_home{
+            margin-top: 9px;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        .back_to_home ul li{
+            float: right;
+        }
+
+        .back_to_home a{
+            color: #000000;
+        }
+
+        .back_to_home a:hover{
+            color: #b3d4fc;
+        }
+
+        .register_box{
+            top: 5%;
+            width: 60%;
+            height: 80%;
+            margin-left: 20%;
+            position: relative;
+            background-color: white;
+        }
+
+        .register_box_content{
+            margin-left: 30%;
+            height: 100%;
+            width: 40%;
+            /*background-color: #0000cc;*/
+        }
+
+        .register_box_title{
+            margin-left: 24%;
+            padding-top: 8%;
+            font-size: 30px;
+        }
+
+        .register_box_input{
+            margin-left: 15%;
+        }
+
+        .register_box_input input{
+            margin-top: 15px;
+            width:80%;
+            height: 40px;
+        }
+
+        .register_box_input img{
+            margin-top: 15px;
+            width:81%;
+            height: 40px;
+        }
+
+        .register_box_input a{
+            margin-top: 15px;
+            color: blue;
+            font-size: 15px;
+        }
+
+        .register_box_input .submit{
+            font-size: 17px;
+            letter-spacing: 25px;
+            color: white;
+            width:81%;
+            background-color: #1400FF;
+            opacity: 0.8;
+            border:none;
+            outline:medium;
+        }
+        .register_box_input .submit:hover{
+            opacity: 0.7;
+        }
+
+
+        .register_footer{
+            top: 85%;
+            width: 100%;
+            height: 15%;
+            position: absolute;
+            background-color: grey;
+        }
+
+        .register_footer_p{
+            text-align: center;
+        }
+
+        .register_footer_p1{
+            margin-top: 30px;
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <div class="clearfix">
+        <div class="register_header">
+            <div class="fl">
+                <h2>SCORM学习平台</h2>
+            </div>
+
+            <div class="back_to_home">
+                <ul>
+                    <li><a href="">首页</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="register_main_body">
+            <div class="register_box">
+                <div class="register_box_content">
+                    <p class="register_box_title">欢迎注册SCORM</p>
+
+                    <div class="register_box_input">
+                        <form action="" method="post">
+                            <input type="text" id="username" name="username" placeholder="设置用户名" style="text-indent:7px">
+                            <input type="password" id="password1" name="password1" placeholder="设置登录密码" style="text-indent:7px">
+                            <input type="password" id="password2" name="password2" placeholder="请再次输入您的密码" style="text-indent:7px">
+                            <input type="text" id="phoneNumber" name="phoneNumber" placeholder="请输入手机号码" style="text-indent:7px">
+                            <input type="submit" class="submit" value="注册">
+                        </form>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="register_footer register_footer_p">
+            <p class="register_footer_p1">技术支撑机构：广药刘军大作业技术研究小组</p>
+            <p>电话：0663-6866933 邮箱：ostreamBaba@orz.cn</p>
+            <p>版权所有: orz权娘真的太强啦</p>
+        </div>
+    </div>
+
+
+</body>
+</html>
