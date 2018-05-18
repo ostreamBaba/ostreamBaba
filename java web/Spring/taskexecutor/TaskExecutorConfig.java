@@ -35,7 +35,7 @@ public class TaskExecutorConfig implements AsyncConfigurer{
 //任务执行类
 @Service
 class AsyncTaskService{
-    @Async
+    @Async //异步任务
     public void executeAsyncTask(Integer i){
         System.out.println("执行异步任务：" +i);
     }
