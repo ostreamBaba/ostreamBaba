@@ -1,6 +1,6 @@
-## Spring MVC的常见注解
+  ## Spring MVC的常见注解
 
-***<font color="blue">@Controller***
+  ***<font color="blue">@Controller***
 * 声明普通的Bean的时候，使用 **<font color="red">@Service** **<font color="red">@Repository** **<font color="red">@Controller** 是等同的，因为@Service@Repository@Controller都组合了 **<font color="red">@Compoment** 元注解，但在Spring MVC中声明控制器Bean时候只能用@Controller
 
 ***<font color="blue">@RequestMapping***
@@ -8,6 +8,7 @@
 
 ***<font color="blue">@ResponseBody***
 * **<font color="red">@Response** 支持 将返回值放在response体内，而不是返回一个页面，我们在很多基于Ajax的程序的时候，可以以此注解返回数据而不是页面；此注解可以放置在返回值前或者方法上。
+
 
 ***<font color="blue">@RequestBody***
 * **<font color="red">@RequestBody** 允许request的参数在request体内，而不是直接在链接在地址后面，此注解放在参数前
