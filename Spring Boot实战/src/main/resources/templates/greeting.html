@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!--@{}引用静态资源文件-->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/test.css}" rel="stylesheet"/>
+
+</head>
+<body>
+
+    <!--<p th:text="'Hello, ' + ${title}" /><br/>-->
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">访问</h3>
+        </div>
+        <div class="panel-body">
+            <span th:text="${singlePerson.name}"></span>
+        </div>
+    </div>
+
+    <div th:if="${not #lists.isEmpty(people)}">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">列表</h3>
+            </div>
+        </div>
+        <div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-ltem" th:each="person:${people}">
+                        <span th:text="${person.name}"></span>
+                        <span th:text="${person.age}"></span>
+                        <button class="btn" th:onclick="'getName(\''+${person.name}+'\');'">获得名字</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+<script th:inline="javascript"> //通过th:inline="javasrcipt" 这样JavaScript代码访问model里面的东西
+    var single=[[${singlePerson}]]; //[[${}]]可获得实际的值
+    console.log(single.name+"/"+single.age);
+    function getName(name) {
+        console.log(name);
+    }
+</script>
+
+
+
+
+</body>
+</html>
