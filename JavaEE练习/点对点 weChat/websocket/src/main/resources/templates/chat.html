@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script th:src="@{/websocket/js/sockjs.min.js}"></script>
+    <script th:src="@{/websocket/js/stomp.js}"></script>
+    <script th:src="@{/js/jquery-3.1.1.js}"></script>
+</head>
+<body>
+<p>聊天室</p>
+<form id="AdminForm">
+    <textarea rows="4" cols="60" name="text"></textarea>
+    <input type="submit" value="发送"/>
+</form>
+
+<script th:inline="javascript">
+    $('#AdminForm').submit(function (e) {
+        e.preventDefault();
+        var textArea=$("#AdminForm").find('textarea[name="text"]');
+        var text=textArea.val();
+        sendSpittle(text);
+        textArea.val('');
+    });
+
+    var sock=new SockJS("/endpointChat");
+    var stomp=Stomp.over(sock);
+    stomp.connect('guest','guest',function (frame) {
+        stomp.subscribe("/user/queue/notifications",handleNotification);
+    });
+
+    function handleNotification(message) {
+        $('#output').append("<b>Received: "+message.body+"</b><br/>");
+    }
+
+    function sendSpittle(text) {
+        stomp.send("/chat",{},text);
+    }
+
+    $("#stop").click(function () {
+        sock.close();
+    });
+
+
+</script>
+<div id="output"></div>
+</body>
+</html>
