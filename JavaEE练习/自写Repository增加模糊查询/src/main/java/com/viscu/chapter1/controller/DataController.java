@@ -58,10 +58,13 @@ public class DataController {
     public List<Person> all(){
         return personRepository.findAll();
     }
-
+    //模糊查询
     @RequestMapping("/auto")
     public Page<Person> auto(Person person){
         Page<Person> pagePeople=personRepository.findByAuto(person,new PageRequest(0,10));
         return pagePeople;
     }
 }
+//控制器接受一个Person查询对象 当person对象时 当Person的name有值时 会对name进行like查询
+//当age有值的时候会进行等于查询 当Person有对个值不为空的时候 会自动构造多个查询条件 当Person所有值为空的时候 默认查询出所有记录
+//在实体类中定义的数据类型要用包装类型 在SpringMVC中 使用原始数据类型会自动初始化为0 而不是空 导致我们构造条件失败

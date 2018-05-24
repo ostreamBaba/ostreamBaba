@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * Created by sang on 2016/12/30.
+ * 继承CustomRepository<Person,Long> 增加模糊查询功能
  */
 
 public interface PersonRepository extends CustomRepository<Person,Long> {

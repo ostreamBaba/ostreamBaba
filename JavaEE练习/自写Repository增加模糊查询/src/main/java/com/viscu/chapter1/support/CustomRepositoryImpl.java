@@ -2,9 +2,11 @@ package com.viscu.chapter1.support;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import javax.persistence.EntityManager;
 import java.io.Serializable;
@@ -27,3 +29,6 @@ public class CustomRepositoryImpl<T,ID extends Serializable> extends SimpleJpaRe
         return findAll(byAuto(entityManager,example),pageable);
     }
 }
+
+
+

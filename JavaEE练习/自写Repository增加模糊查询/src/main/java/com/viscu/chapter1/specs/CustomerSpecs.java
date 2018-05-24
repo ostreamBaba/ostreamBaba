@@ -22,9 +22,10 @@ import static com.google.common.collect.Iterators.toArray;
 /**
  * @ Create by ostreamBaba on 18-5-24
  * @ 结合Specification和自定义Repository实现自动模糊查询
+ * 对任意的实体进行查询 对象里有几个值 就查几个值 当字符型就自动进行like查询 没有值就查询全部
  */
-public class CustomerSpecs {
 
+public class CustomerSpecs {
     //定义一个返回值为Spcification的方法ByAuto
     public static <T> Specification<T> byAuto(final EntityManager entityManager, final T example){
         @SuppressWarnings("unchecked")
@@ -42,7 +43,7 @@ public class CustomerSpecs {
                         if(attr.getJavaType()==String.class){//当前属性为字符串类型
                             if(!StringUtils.isEmpty(attrValue)){ //当字符串不为空
                                 predicates.add(criteriaBuilder.like(root.get(attribute(entityType,attr.getName(),String.class)),
-                                    pattern((String)attrValue) ));
+                                    pattern((String)attrValue)));
                                 //构造当前属性like(前后%)属性值查询条件 并添加到列表当中
                             }
                         }else {
@@ -62,18 +63,17 @@ public class CustomerSpecs {
             /*
              * 获得实体类的当前属性的SingularAttribute(包含实体类的某个单独属性)
              */
-            private <T,E> SingularAttribute<T,E> attribute(EntityType<T> entityType,String fielaName,
+            private <T,E> SingularAttribute<T,E> attribute(EntityType<T> entityType,String fieldName,
                                                            Class<E> fieldClass){
-                return entityType.getDeclaredSingularAttribute(fielaName,fieldClass);
+                return entityType.getDeclaredSingularAttribute(fieldName,fieldClass);
             }
 
         };
     }
     /*
-        构造like查询模式 即前后加%
+        构造like查询模式 即前后加%  %xxx%
      */
     static private String pattern(String str){
         return "%"+str+"%";
     }
-
 }

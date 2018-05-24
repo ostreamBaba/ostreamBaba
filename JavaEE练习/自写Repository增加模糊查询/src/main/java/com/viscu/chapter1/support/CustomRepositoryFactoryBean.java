@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 /**
  * @ Create by ostreamBaba on 18-5-24
- * @ 描述
+ * @ 自定义工厂
  */
 
 public class CustomRepositoryFactoryBean<T extends JpaRepository<S,ID>,S,ID extends Serializable> extends JpaRepositoryFactoryBean<T,S,ID>{
