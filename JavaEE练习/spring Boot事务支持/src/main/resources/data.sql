@@ -1,0 +1,6 @@
+INSERT INTO person(id,name,age,address) VALUES (hinerbate_sequence.nextval,"ostream",22,"guangzhou")
+INSERT INTO person(id,name,age,address) VALUES (hinerbate_sequence.nextval,"xx",22,"hf")
+INSERT INTO person(id,name,age,address) VALUES (hinerbate_sequence.nextval,"yy",24,"sh")
+INSERT INTO person(id,name,age,address) VALUES (hinerbate_sequence.nextval,"zz",23,"bj")
+INSERT INTO person(id,name,age,address) VALUES (hinerbate_sequence.nextval,"ee",18,"gx")
+INSERT INTO person(id,name,age,address) VALUES (hinerbate_sequence.nextval,"ff",72,"qy")
