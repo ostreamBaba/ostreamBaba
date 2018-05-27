@@ -27,6 +27,8 @@ public class SysUser implements UserDetails{
     private String password;
 
     @ManyToMany(cascade = {CascadeType.REFRESH},fetch = FetchType.EAGER)
+    //CascadeType.REFRESH：级联刷新，当多个用户同时作操作一个实体，为了用户取到的数据是实时的，在用实体中的数据之前就可以调用一下refresh()方法
+    //FetchType.EAGER：急加载 其中定义是急加载的的属性(property)和字段(field)会立即从数据库中加载
     private List<SysRole> roles; //配置用户和角色的多对多关系
 
     @Override
