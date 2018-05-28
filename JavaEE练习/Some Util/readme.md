@@ -27,4 +27,8 @@ class=org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl
 <password-encoder hash=md5 在他的属性中指明了加盐之后的加密算法 即MD5(应该是32位 我测试是32位的)
 这样设置后你的数据库中的密码也应该是经过盐值加密的。
 比如username:gaobing 在数据库中的password应该是899312{gaobing}经过MD5加密后的 4daf885e05ff45a72ada6652a3727b6a。
+
 ```
+
+
+* 32位bit密码是否安全? --多轮加盐？
