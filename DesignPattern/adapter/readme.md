@@ -11,7 +11,7 @@
            电源的比喻     实例程序
 实际情况   交流100伏特    Banner类(showWithParen)
 交换装置   适配器         PrintBanner类
-需求      直流12伏特      Print借口(printWeak)
+需求      直流12伏特      Print接口(printWeak)
 ```
 
 
