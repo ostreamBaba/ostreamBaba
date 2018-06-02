@@ -6,12 +6,13 @@
     * 类适配器模式(使用继承的适配器)
     * 对象适配器模式(使用委托的适配器)
 
+```java
 电源的比喻和示例程序的对应关系
-         电源的比喻     实例程序
+           电源的比喻     实例程序
 实际情况   交流100伏特    Banner类(showWithParen)
 交换装置   适配器         PrintBanner类
 需求      直流12伏特      Print借口(printWeak)
-
+```
 
 
 * 什么时候使用Adapter模式
@@ -24,6 +25,6 @@
 
         * 支持Version2.0的程序 ------> MyClass
         Version2.0
-        * 支持Version1.0的程序 ------> 1.0 < ---- > 2.0（转换适配器） ----- >  MyClass Version2.0 
+        * 支持Version1.0的程序 ------> 1.0 < ---- > 2.0（转换适配器） ----- >  MyClass Version2.0
         * 让新版本扮演adaptee的角色，旧版本扮演Target的角色，接着编写一个扮演Adapter角色的类，让它使用新版本的类来实现旧版本的类的方法。
     * 功能完全不同的类不能使用Adapter模式
