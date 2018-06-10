@@ -4,8 +4,10 @@ import org.apache.http.annotation.ThreadSafe;
 
 /**
  * @ Create by ostreamBaba on 18-6-10
- * @ ??
+ * @ 描述
  */
+
+
 @ThreadSafe
 public class notifyTest {
 
@@ -27,13 +29,17 @@ public class notifyTest {
             this.notify();
         }
     }
-
-    public static void main(String[] args) {
-
-    }
-
-
 }
+
+
+
+/*AQS的实现是这样的：存在两个队列，sync队列和condition队列。争抢lock的所有线程都在sync队列上，
+        await之后的线程从sync队列移出并挂到condition队列上，同时释放lock。
+        condition队列上的某个线程收到signal之后会重新挂到sync队列上，
+        并和sync队列上已有的其他线程一起竞争lock。如果是signalAll，
+        那么就是把condition队列上的所有线程都挂到sync队列上来。
+        Object.wait/notify是jvm的内部实现，因此上面关于AQS的说明可以作为参考。
+        被notify后的线程处于blocking或者runnable状态，其他wait线程依然是waiting状态。*/
 
 
 class WaitNotifyTest{
@@ -53,7 +59,7 @@ class WaitNotifyTest{
                     long startTime=System.currentTimeMillis();
                     try{
                         System.out.println("将线程 "+this.getName()+" 加入shareObj的等待队列,并释放当前线程所占有的shareObj实例的锁");
-                        shareObj.wait();
+                        shareObj.wait(10000); //设置wait时间
                     }catch (InterruptedException e){
                         throw new RuntimeException(e);
                     }
@@ -83,7 +89,13 @@ class WaitNotifyTest{
             synchronized (shareObj){
                 System.out.println("线程 "+this.getName()+" 准备通知");
                 shareObj[0]="false";
+                //shareObj.notify();
                 shareObj.notifyAll();
+                try {
+                    sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("线程 "+this.getName()+" 通知结束");
             }
             System.out.println("线程 "+this.getName()+" 结束运行");
@@ -94,8 +106,9 @@ class WaitNotifyTest{
 
     public static void main(String[] args) {
         WaitNotifyTest test=new WaitNotifyTest();
+
         ThreadWait threadWait1=test.new ThreadWait("wait thread1");
-        threadWait1.setPriority(2);
+        threadWait1.setPriority(8);
         ThreadWait threadWait2=test.new ThreadWait("wait thread2");
         threadWait2.setPriority(3);
         ThreadWait threadWait3=test.new ThreadWait("wait thread3");
