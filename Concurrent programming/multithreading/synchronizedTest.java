@@ -2,6 +2,9 @@ package com.multithreading;
 
 import org.apache.http.annotation.ThreadSafe;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * @ Create by ostreamBaba on 18-6-9
  * @ 描述
@@ -37,4 +40,41 @@ class someThing{
         }
     }
 
+}
+
+
+class SynchronizedAndLock{
+
+    private ReentrantLock lock=new ReentrantLock();
+    //出现return语句锁不会被释放
+    void method(){
+        lock.lock();
+        /*if(条件表达式){
+           return;
+        }*/
+        lock.unlock();
+    }
+
+    void method2(){
+        lock.lock();
+        doMethod(); //抛出异常不会释放锁
+        lock.unlock();
+    }
+
+    private void doMethod() {
+        throw new RuntimeException();
+    }
+
+    //使用finally 无论如何都会执行unlock方法
+    void method3(){
+        lock.lock();
+        try {
+            //todo
+        }finally {
+            lock.unlock();
+        }
+        //finally这种用法就是Before/After模式(事前/事后模式)
+    }
+
+    //synchronized方法无论return或者抛出异常一定会释放锁
 }
