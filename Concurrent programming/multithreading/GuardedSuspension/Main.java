@@ -6,7 +6,8 @@ package com.multithreading.GuardedSuspension;
  */
 public class Main {
     public static void main(String[] args) {
-        RequestQueue requestQueue=new RequestQueue();
+        RequestQueue1 requestQueue=new RequestQueue1();
+        //RequestQueue requestQueue=new RequestQueue();
         new ClientThread(requestQueue,"Client",3143592L).start();
         new ServerThread(requestQueue,"Server",6546897L).start();
     }

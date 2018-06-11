@@ -8,9 +8,16 @@ import java.util.Random;
  */
 public class ServerThread extends Thread{
     private final Random random;
-    private final RequestQueue requestQueue;
+    /*private final RequestQueue requestQueue;
 
     public ServerThread(RequestQueue requestQueue,String name,long seed) {
+        super(name);
+        this.random=new Random(seed);
+        this.requestQueue = requestQueue;
+    }*/
+    private final RequestQueue1 requestQueue;
+
+    public ServerThread(RequestQueue1 requestQueue,String name,long seed) {
         super(name);
         this.random=new Random(seed);
         this.requestQueue = requestQueue;
