@@ -14,7 +14,7 @@ public class RequestQueue {
     public synchronized Request getRequest() {
         //客户端线程获取请求 当队列为空的话 那么就将该线程加入等待队列
         //使用队列FIFO先进先出处理请求
-        while (queue.peek()==null){  //守护条件
+        while (queue.peek()==null){  //守护条件  一定要用while
             try {
                 this.wait(); //线程在等待什么： 等待queue实例对象状态发生变化
             }catch (InterruptedException e){
