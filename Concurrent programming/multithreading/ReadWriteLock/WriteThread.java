@@ -8,11 +8,17 @@ import java.util.Random;
  */
 public class WriteThread extends Thread{
     private final static Random RANDOM=new Random();
-    private final Data data;
+    //private final Data data;
     private final String filler;
     private int index=0;
 
-    public WriteThread(Data data, String filler) {
+    private final Data1 data;
+
+    /*public WriteThread(Data data, String filler) {
+        this.data = data;
+        this.filler = filler;
+    }*/
+    public WriteThread(Data1 data, String filler) {
         this.data = data;
         this.filler = filler;
     }

@@ -5,9 +5,15 @@ package com.multithreading.ReadWriteLock;
  * @ ÃèÊö
  */
 public class ReadThread extends Thread{
-    private final Data data;
+    /*private final Data data;
 
     public ReadThread(Data data) {
+        this.data = data;
+    }*/
+
+    private final Data1 data;
+
+    public ReadThread(Data1 data) {
         this.data = data;
     }
 

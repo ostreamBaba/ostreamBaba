@@ -6,7 +6,7 @@ package com.multithreading.ReadWriteLock;
  */
 public class Main {
     public static void main(String[] args) {
-        Data data=new Data(10);
+        Data1 data=new Data1(10);
         new ReadThread(data).start();
         new ReadThread(data).start();
         new ReadThread(data).start();
