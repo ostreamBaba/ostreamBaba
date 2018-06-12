@@ -1,10 +1,8 @@
 # 关于ostreamBaba的说明(持续更新 为拿到好offer做准备)
 
 * algorithm文件夹是关于一些算法学习的知识
-* deep learning文件夹放的是一些关于深度学习的资料(只是资料而已..)
 * java Web文件夹包含的是对SSM SSH等框架的学习知识
 * python 爬虫学习 
-* think_Practice 坦克大战(之后会进行修改)
 * thinking_in_java java基础知识的学习
 
 > [关于java编程思想中文版的一些错误](https://book.douban.com/review/7803218/)
