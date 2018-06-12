@@ -34,6 +34,15 @@ class Data1{
         }
     }
 
+/*
+    before();//若before发生异常 下面的try-finally块就不会发生
+    try{
+       execute();
+    }finally{
+        after();
+    }
+*/
+
     public char[] read() throws InterruptedException{
         readLock.lock();
         try {
@@ -41,6 +50,20 @@ class Data1{
         }finally {
             readLock.unlock();
         }
+        /*  若写成：
+            try{
+               readLock.lock();
+               return doRead();
+            }finally{
+                readLock.unlock();
+            }
+            程序可以正常运行 但当程序被interrupt时 程序就可能存在过多调用readUnlock或writeLock的危险
+            假设线程正在lock.readLock()中进行wait 那么当线程被interrupt时便会抛出InterruptException异常
+            退出readLock方法 这时readingReaders字段并不会自增
+            从readLock退出的线程会跳到finally语句块 执行readLock.unlock()
+            在当中 之前未递增的readingReaders字段会执行递减操作 那么readingReaders字段的值会比正常的要小
+
+        */
     }
 
     public void write(char c) throws InterruptedException{
