@@ -1,7 +1,6 @@
 package com.multithreading.ThreadPerMessage;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.*;
 
 /**
  * @ Create by ostreamBaba on 18-6-12
@@ -35,11 +34,63 @@ public class Main {
                 return new Thread(runnable);
             }
         } );*/
-        Host1 host=new Host1(Executors.defaultThreadFactory());
+        Host1 host=new Host1( Executors.defaultThreadFactory());
         //Executors.defaultThreadFactory() 可以获取当前默认设置的ThreadFactory对象
         host.request(10,'A');
         host.request(20,'B');
         host.request(30,'C');
+        System.out.println("main END");
+    }
+}
+
+class Main1{
+    public static void main(String[] args) {
+        System.out.println("main BEING");
+        Host2 host=new Host2(new Executor(){
+            @Override
+            public void execute(Runnable runnable) {
+                new Thread(runnable).start();
+            }
+        });
+        host.request(10,'A');
+        host.request(20,'B');
+        host.request(30,'C');
+        System.out.println("main END");
+    }
+}
+
+class Main2{
+    public static void main(String[] args) {
+        System.out.println("main BEING");
+        //使用ExecutorService对象来创建Host对象
+        //Executors.newCachedThreadPool方法会创建 可复用线程型ExecutorService对象
+        //虽然我们使用了Executor进行了抽象化 可最终还是要自己手动执行new Thread{..}
+        //可是仔细想想并不是每次都必须创建线程 只要遵循Executor借口 我们可以使用 "会复用那些处理执行结束后空闲下来的线程" 的类--ExecutorService
+        ExecutorService executorService=Executors.newCachedThreadPool();
+        Host2 host=new Host2(executorService);
+        try{
+            host.request(10,'a');
+            host.request(20,'b');
+            host.request(30,'C');
+        }finally {
+            executorService.shutdown();
+        }
+        System.out.println("main END");
+    }
+}
+
+class Main3{
+    public static void main(String[] args) {
+        System.out.println("main BEING");
+        ScheduledExecutorService scheduledExecutorService=Executors.newScheduledThreadPool(5);//5表示无工作时也会一直持有的线程个数
+        Host3 host=new Host3(scheduledExecutorService);
+        try{
+            host.request(10,'a');
+            host.request(20,'b');
+            host.request(30,'c');
+        }finally {
+            scheduledExecutorService.shutdown();
+        }
         System.out.println("main END");
     }
 }
