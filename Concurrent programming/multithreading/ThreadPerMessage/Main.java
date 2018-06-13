@@ -1,5 +1,6 @@
 package com.multithreading.ThreadPerMessage;
 
+import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
 /**
@@ -28,12 +29,14 @@ public class Main {
         //Client 委托人
         System.out.println("main BEING");
         /*Host host=new Host();*/
-        Host1 host=new Host1( new ThreadFactory() {
+        /*Host1 host=new Host1( new ThreadFactory() {
             @Override
             public Thread newThread(Runnable runnable) {
                 return new Thread(runnable);
             }
-        } );
+        } );*/
+        Host1 host=new Host1(Executors.defaultThreadFactory());
+        //Executors.defaultThreadFactory() 可以获取当前默认设置的ThreadFactory对象
         host.request(10,'A');
         host.request(20,'B');
         host.request(30,'C');
