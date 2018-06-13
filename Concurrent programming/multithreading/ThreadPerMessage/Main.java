@@ -1,5 +1,7 @@
 package com.multithreading.ThreadPerMessage;
 
+import java.util.concurrent.ThreadFactory;
+
 /**
  * @ Create by ostreamBaba on 18-6-12
  * @ Thread-Per-Message 每个消息一个线程(为每个命令或者请求分配一个新的线程) 消息的委托端和执行端是不同的线程
@@ -25,7 +27,13 @@ public class Main {
     public static void main(String[] args) {
         //Client 委托人
         System.out.println("main BEING");
-        Host host=new Host();
+        /*Host host=new Host();*/
+        Host1 host=new Host1( new ThreadFactory() {
+            @Override
+            public Thread newThread(Runnable runnable) {
+                return new Thread(runnable);
+            }
+        } );
         host.request(10,'A');
         host.request(20,'B');
         host.request(30,'C');
