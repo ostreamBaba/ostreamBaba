@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<link rel="stylesheet" th:src="@{css/bootstrap.min.css}">-->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script th:href="@{js/jquery-3.2.1.min.js}"></script>
+    <script th:href="@{js/bootstrap.min.js}"></script>
+    <style>
+        body{
+            margin-top: 70px;
+        }
+        li{
+            text-decoration: none;
+            list-style-type: none;
+            display: inline;
+            color: grey;
+            font-size: 12px;
+        }
+        li:hover{
+            text-decoration: none;
+        }
+        .panel-body a{
+            color: black;
+            font-size: 15px;
+        }
+    </style>
+
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top header line" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">广药租车</a>
+        </div>
+        <div id="navbar-dropdown" class="navbar-collapse collapse navbar-exl-collapse">
+            <ul class="nav navbar-nav pull-left main-nav-location">
+                <li><a href="#"><b>广药租车系统欢迎您</b></a></li>
+            </ul>
+            <div th:if="${session.username}">
+                <ul class="nav navbar-nav pull-right main-nav-location">
+                    <li><a href="#"><b th:text="${session.username}"></b></a></li>
+                    <li><a href="/car/first"><b>首页</b></a></li>
+                    <li><a href="/Car/toCarMain"><b>车辆租借</b></a></li>
+                    <li><a href="/car/index"><b>会员中心</b></a></li>
+                </ul>
+            </div>
+
+            <div th:if="${session.username==null}">
+                <ul class="nav navbar-nav pull-right main-nav-location">
+                    <li><a href="#"><b>首页</b></a></li>
+                    <li><a href="/car/login"><b>登录</b></a></li>
+                    <li><a href="/car/register"><b>注册</b></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</nav>
+    <div class="container">
+        <div style="margin-bottom: 25px;" class="form-inline">
+            <span style="font-size:35px;border-right: 1px solid grey;"><b>广药租车&nbsp;</b></span>
+            <span style="margin-left: 10px;font-size: 25px;">会员中心</span>
+        </div>
+    </div>
+    <div style="border-bottom: 2px solid grey"></div>
+    <div style="height: 20px;"></div>
+    <div class="container">
+        <div class="row">
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="background-color:#ec971f;">
+                            <div class="panel-title" style="text-align: center;font-size: 20px;color: white">
+                                <span>我的租车</span>
+                            </div>
+                        </div>
+                        <div class="panel-body" style="text-align: center;">
+                            <a href="/car/index">订单</a>
+                            <hr>
+                            <a href="/carUser/gotoChange">编辑资料</a>
+                            <hr>
+                            <a href="/carUser/gotoReset">修改密码</a>
+                            <hr>
+                            <a href="/carUser/layout">注销</a>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${status == 1}">
+                    <div class="col-md-9">
+                        <div class="well" style="background-color:white;">
+                            <span style="font-size: 23px;border-left: 8px solid blue">&nbsp;&nbsp;我的订单
+                                <small th:if="${block==1}">所有订单</small>
+                                <small th:if="${block==2}">完成订单</small>
+                            </span>
+                            <hr>
+                            <div class="form-inline">
+                                <a href="/car/index"><button class="btn btn-info">所有订单</button></a>
+                                <a href="/car/all"><button class="btn btn-info" style="margin-left: 5px;">完成订单</button></a>
+                            </div>
+                            <hr>
+                            <div th:if="${block==1}">
+                                <table class="table table-bordered" style="text-align: center">
+                                    <tr>
+                                        <th>订单号</th>
+                                        <th>车型图片</th>
+                                        <th>车型</th>
+                                        <th>租期</th>
+                                        <th>价格</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    <tr th:if="${session.orders!=null}">
+                                        <td style="padding-top: 30px;" th:text="${session.orders.orderId}"></td>
+                                        <td><img src="http://zc1.zhuizhan.com/Uploads/Car/20170605/193640593542487b09c.jpg"
+                                                 height="70px;" width="100px;"></td>
+                                        <td style="padding-top: 30px;" th:text="${session.orders.orderCarName}"></td>
+                                        <td style="padding-top: 30px;" th:text="${session.orders.day}"></td>
+                                        <td style="padding-top: 30px;">￥<span th:text="${session.orders.price}"></span></td>
+                                        <td>
+                                            <a th:href=@{/order/gotoDetails(orderId=${session.orders.orderId})}><button class="btn btn-info" style="margin-top: 15px;">
+                                                详细
+                                            </button></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div th:if="${block==2}">
+                                <table class="table table-bordered" style="text-align: center">
+                                    <tr>
+                                        <th>订单号</th>
+                                        <th>车型图片</th>
+                                        <th>车型</th>
+                                        <th>租期</th>
+                                        <th>价格</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    <tr th:each="o : ${orderList}">
+                                        <td style="padding-top: 30px;" th:text="${o.orderId}"></td>
+                                        <td><img src="http://zc1.zhuizhan.com/Uploads/Car/20170605/193640593542487b09c.jpg"
+                                                 height="70px;" width="100px;"></td>
+                                        <td style="padding-top: 30px;" th:text="${o.orderCarName}"></td>
+                                        <td style="padding-top: 30px;" th:text="${o.day}"></td>
+                                        <td style="padding-top: 30px;">￥<span th:text="${o.price}"></span></td>
+                                        <td>
+                                            <a th:href=@{/order/gotoDetails(orderId=${o.orderId})}><button class="btn btn-info" style="margin-top: 15px;">
+                                                详细
+                                            </button></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div th:if="${status == 2}">
+                    <div class="col-md-9">
+                        <div class="well" style="background-color:white;height: 600px;">
+                            <span style="font-size: 23px;border-left: 8px solid blue">&nbsp;&nbsp;我的资料</span>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-offset-2 col-md-7">
+                                    <div th:if="${msg=='success'}" class="alert alert-success">
+                                        修改成功
+                                    </div>
+                                    <form class="form-horizontal" role="form" action="/carUser/change" method="post">
+                                        <div class="form-group">
+                                            <label for="id" class="col-sm-4 control-label">会员id</label>
+                                            <div class="col-sm-8">
+                                                <div style="height: 7px;"></div>
+                                                <span id="id" name="id" th:text="${carUser.carId}"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pwd1" class="col-sm-4 control-label">用户名</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="name" name="name"
+                                                       th:value="${carUser.carUsername}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pwd2" class="col-sm-4 control-label">邮箱</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="email" name="email"
+                                                       th:value="${carUser.email}" disabled>
+                                            </div>
+                                        </div>
+                                        <div style="height: 15px;"></div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-4 col-sm-10">
+                                                <button type="submit" class="btn btn-info" style="width: 295px;">修改</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div th:if="${status == 3}">
+                    <div class="col-md-9">
+                        <div class="well" style="background-color:white;height: 600px;">
+                            <span style="font-size: 23px;border-left: 8px solid blue">&nbsp;&nbsp;修改密码</span>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-offset-2 col-md-7">
+                                    <div th:if="${error}" class="alert alert-danger">
+                                        密码不正确，请重新输入
+                                    </div>
+                                    <form class="form-horizontal" role="form" action="/carUser/reset" method="post">
+                                        <div class="form-group">
+                                            <label for="pwd" class="col-sm-4 control-label">原密码</label>
+                                            <div class="col-sm-8">
+                                                <input type="password" class="form-control" id="pwd" name="pwd"
+                                                       placeholder="请输入原密码">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pwd1" class="col-sm-4 control-label">新密码</label>
+                                            <div class="col-sm-8">
+                                                <input type="password" class="form-control" id="pwd1" name="pwd1"
+                                                       placeholder="请输入新密码">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pwd2" class="col-sm-4 control-label">确认密码</label>
+                                            <div class="col-sm-8">
+                                                <input type="password" class="form-control" id="pwd2"
+                                                       name="pwd2"
+                                                       placeholder="请确认密码">
+                                            </div>
+                                        </div>
+                                        <div style="height: 15px;"></div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-4 col-sm-10">
+                                                <button type="submit" class="btn btn-info" style="width: 295px;">修改</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div style="height: 54px;"></div>
+        <hr>
+        <div class="row">
+            <div class="col-md-3" style="text-align: center">
+                <h5>租车预订说明</h5>
+                租车手续
+                <div style="height: 5px;"></div>
+                车辆租赁合同
+                <div style="height: 5px;"></div>
+                租车说明
+            </div>
+            <div class="col-md-3" style="text-align: center">
+                <h5>租车费用及结算</h5>
+                银行支付
+                <div style="height: 5px;"></div>
+                结算流程
+                <div style="height: 5px;"></div>
+                发票报销
+            </div>
+            <div class="col-md-3" style="text-align: center">
+                <h5>紧急事务处理</h5>
+                保险责任
+                <div style="height: 5px;"></div>
+                理赔说明
+            </div>
+            <div class="col-md-3" style="text-align: center">
+                <h5>会员管理</h5>
+                用户协议
+            </div>
+        </div>
+
+    </div>
+<div style="height: 20px;"></div>
+<div style="background-color: #011328;height: 200px;margin-top: 30px;">
+    <div class="container">
+        <ul style="margin-top: 70px;">
+            <li>关于我们&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li>新闻中心&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li>加盟合作&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li>隐私保护&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li>联系我们</li>
+            <li class="pull-right" style="font-size: 25px;">
+                广药租车有限公司
+            </li>
+            <li style="display: block;margin-top: 30px">
+                广东药科大学第12小队
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+</div>
+</body>
+</html>

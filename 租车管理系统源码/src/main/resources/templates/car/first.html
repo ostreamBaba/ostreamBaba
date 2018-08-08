@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<link rel="stylesheet" th:src="@{css/bootstrap.min.css}">-->
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <script th:href="@{js/jquery-3.2.1.min.js}"></script>
+        <script th:href="@{js/bootstrap.min.js}"></script>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body{
+            margin-top: 70px;
+        }
+        li{
+            text-decoration: none;
+            list-style-type: none;
+            display: inline;
+            color: grey;
+            font-size: 12px;
+        }
+        li:hover{
+            text-decoration: none;
+        }
+        .panel-body a{
+            color: black;
+            font-size: 15px;
+        }
+    </style>
+
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top header line" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">广药租车</a>
+        </div>
+        <div id="navbar-dropdown" class="navbar-collapse collapse navbar-exl-collapse">
+            <ul class="nav navbar-nav pull-left main-nav-location">
+                <li><a href="#"><b>广药租车系统欢迎您</b></a></li>
+            </ul>
+            <div th:if="${session.username}">
+                <ul class="nav navbar-nav pull-right main-nav-location">
+                    <li><a href="#"><b th:text="${session.username}"></b></a></li>
+                    <li><a href="/car/first"><b>首页</b></a></li>
+                    <li><a href="/Car/toCarMain"><b>车辆租借</b></a></li>
+                    <li><a href="/car/index"><b>会员中心</b></a></li>
+                </ul>
+            </div>
+
+            <div th:if="${session.username==null}">
+                <ul class="nav navbar-nav pull-right main-nav-location">
+                    <li><a href="#"><b>首页</b></a></li>
+                    <li><a href="/car/login"><b>登录</b></a></li>
+                    <li><a href="/car/register"><b>注册</b></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div style="margin-bottom: 25px;" class="form-inline">
+        <span style="font-size:35px;"><b>广药租车&nbsp;</b></span>
+    </div>
+</div>
+<div style="border-bottom: 2px solid grey"></div>
+<div>
+    <img src="http://zc1.zhuizhan.com/Uploads/Images/20170619/092053594726f5b974f.jpg">
+</div>
+
+<div class="well">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="http://zc1.zhuizhan.com/Uploads/Images/20170619/09260859472830d3abc.jpg">
+            </div>
+            <div class="col-md-3">
+                <img src="http://zc1.zhuizhan.com/Uploads/Images/20170619/0926035947282b3e46d.jpg">
+            </div>
+            <div class="col-md-3">
+                <img src="http://zc1.zhuizhan.com/Uploads/Images/20170619/092556594728248c988.jpg">
+            </div>
+            <div class="col-md-3">
+                <img src="http://zc1.zhuizhan.com/Uploads/Images/20170619/09260859472830d3abc.jpg">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="well" style="background-color:white;">
+        <h2 style="text-align: center">租车快讯，我都懂</h2>
+        <div style="height: 45px;"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <h4>新闻资讯</h4>
+                <p>燃油政策有哪些？</p>
+                <p>异地还车费怎样计算?</p>
+                <p>订单价格是否包含异地还车费？</p>
+                <p>什么是异地还车费？</p>
+                <p>租金费用</p>
+                <p>文章标题</p>
+                <p>故弄玄虚<</p>
+                <p>地面不平，踢脚线与地板有间隙</p>
+                <p>这些问题千万别犯！否则装修就是“无底洞”</p>
+            </div>
+            <div class="col-md-4" style="border-left: 1px solid #F5F5F5">
+                <h4>租车问答</h4>
+                <p>有霸道车吗？</p>
+                <p>有轩逸车吗？</p>
+                <p>租车押金多少，可以长租么？</p>
+                <p>租车押金多少？</p>
+                <p>你好，我在火车南站取车机场还车，行吗</p>
+                <p>海口租车公司都有哪些?</p>
+                <p>海口租车多少钱一天?</p>
+                <p>海口租车有配司机吗?</p>
+                <p>海口租一辆宝马大概多少钱?</p>
+            </div>
+            <div class="col-md-4" style="border-left: 1px solid #F5F5F5">
+                <img src="http://zc1.zhuizhan.com/Public/Home/images/bxsm_01.jpg">
+                <img src="http://zc1.zhuizhan.com/Public/Home/images/bxsm_02.jpg">
+                <img src="http://zc1.zhuizhan.com/Public/Home/images/bxsm_03.jpg">
+                <img src="http://zc1.zhuizhan.com/Public/Home/images/bxsm_04.jpg">
+                <img src="http://zc1.zhuizhan.com/Public/Home/images/bxsm_05.jpg">
+                <img src="http://zc1.zhuizhan.com/Public/Home/images/bxsm_06.jpg">
+            </div>
+
+        </div>
+    </div>
+
+    <div style="height: 25px;"></div>
+    <hr>
+    <div class="row">
+        <div class="col-md-3" style="text-align: center">
+            <h5>租车预订说明</h5>
+            租车手续
+            <div style="height: 5px;"></div>
+            车辆租赁合同
+            <div style="height: 5px;"></div>
+            租车说明
+        </div>
+        <div class="col-md-3" style="text-align: center">
+            <h5>租车费用及结算</h5>
+            银行支付
+            <div style="height: 5px;"></div>
+            结算流程
+            <div style="height: 5px;"></div>
+            发票报销
+        </div>
+        <div class="col-md-3" style="text-align: center">
+            <h5>紧急事务处理</h5>
+            保险责任
+            <div style="height: 5px;"></div>
+            理赔说明
+        </div>
+        <div class="col-md-3" style="text-align: center">
+            <h5>会员管理</h5>
+            用户协议
+        </div>
+    </div>
+</div>
+<div style="height: 20px;"></div>
+<div style="background-color: #011328;height: 200px;margin-top: 30px;">
+    <div class="container">
+        <ul style="margin-top: 70px;">
+            <li>关于我们&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li>新闻中心&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li>加盟合作&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li>隐私保护&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li>联系我们</li>
+            <li class="pull-right" style="font-size: 25px;">
+                广药租车有限公司
+            </li>
+            <li style="display: block;margin-top: 30px">
+                广东药科大学第12小队
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

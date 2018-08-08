@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="secure_template">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<link rel="stylesheet" th:src="@{css/bootstrap.min.css}">-->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script th:href="@{js/jquery-3.2.1.min.js}"></script>
+    <script th:href="@{js/bootstrap.min.js}"></script>
+    <style>
+        body{
+            margin-top: 70px;
+        }
+        li{
+            text-decoration: none;
+            list-style-type: none;
+            display: inline;
+            color: grey;
+            font-size: 12px;
+        }
+        li:hover{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div th:fragment="header">
+    <nav class="navbar navbar-default navbar-fixed-top header line" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">广药租车</a>
+            </div>
+            <div id="navbar-dropdown" class="navbar-collapse collapse navbar-exl-collapse">
+                <ul class="nav navbar-nav pull-left main-nav-location">
+                    <li><a href="#"><b>广药租车系统欢迎您</b></a></li>
+                </ul>
+                <ul class="nav navbar-nav pull-right main-nav-location">
+                    <li><a href="#"><b>首页</b></a></li>
+                    <li><a href="/car/login"><b>登录</b></a></li>
+                    <li><a href="/car/register"><b>注册</b></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+</div>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<link rel="stylesheet" th:src="@{css/bootstrap.min.css}">-->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script th:href="@{js/jquery-3.2.1.min.js}"></script>
+    <script th:href="@{js/bootstrap.min.js}"></script>
+    <style>
+        body{
+            margin-top: 70px;
+        }
+        li{
+            text-decoration: none;
+            list-style-type: none;
+            display: inline;
+            color: grey;
+            font-size: 12px;
+        }
+        li:hover{
+            text-decoration: none;
+        }
+        .panel-body a{
+            color: black;
+            font-size: 15px;
+        }
+    </style>
+
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top header line" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">广药租车</a>
+        </div>
+        <div id="navbar-dropdown" class="navbar-collapse collapse navbar-exl-collapse">
+            <ul class="nav navbar-nav pull-left main-nav-location">
+                <li><a href="#"><b>广药租车系统欢迎您</b></a></li>
+            </ul>
+            <div th:if="${session.username}">
+                <ul class="nav navbar-nav pull-right main-nav-location">
+                    <li><a href="#"><b th:text="${session.username}"></b></a></li>
+                    <li><a href="/car/first"><b>首页</b></a></li>
+                </ul>
+            </div>
+
+            <div th:if="${session.username==null}">
+                <ul class="nav navbar-nav pull-right main-nav-location">
+                    <li><a href="#"><b>首页</b></a></li>
+                    <li><a href="/car/login"><b>登录</b></a></li>
+                    <li><a href="/car/register"><b>注册</b></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div style="margin-bottom: 25px;" class="form-inline">
+        <span style="font-size:35px;border-right: 1px solid grey;"><b>广药租车&nbsp;</b></span>
+        <span style="margin-left: 10px;font-size: 25px;">管理员界面</span>
+    </div>
+</div>
+<div style="border-bottom: 2px solid grey"></div>
+<div style="height: 20px;"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background-color:#ec971f;">
+                    <div class="panel-title" style="text-align: center;font-size: 20px;color: white">
+                        <span>管理员功能</span>
+                    </div>
+                </div>
+                <div class="panel-body" style="text-align: center;">
+                    <a href="/admin/add">添加车辆</a>
+                    <hr>
+                    <a href="/admin/order">处理订单</a>
+                    <hr>
+                    <a href="/carUser/layout">注销</a>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${status == 1}">
+            <div class="col-md-9">
+                <div class="well" style="background-color:white;height: 550px;">
+                    <span style="font-size: 23px;border-left: 8px solid blue">&nbsp;&nbsp;添加车辆</span>
+                    <hr>
+                    <div style="height: 45px;"></div>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-7">
+                            <div th:if="${success}" class="alert alert-success">
+                                添加成功
+                            </div>
+                            <form class="form-horizontal" role="form" action="/Car/newCar" METHOD="post">
+                                <div class="form-group">
+                                    <label for="carBrand" class="col-sm-2 control-label">品牌</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="carBrand" id="carBrand"
+                                               placeholder="请输入汽车品牌">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="carName" class="col-sm-2 control-label">名称</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="carName" id="carName"
+                                               placeholder="请输入名称">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="carType" class="col-sm-2 control-label">车型</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="carType" id="carType"
+                                               placeholder="请输入车型">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="price" class="col-sm-2 control-label">日租金</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="price" id="price"
+                                               placeholder="请输入日租金">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-default">添加</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:if="${status == 2}">
+            <div class="col-md-9">
+                <div class="well" style="background-color:white;height: 550px;">
+                    <span style="font-size: 23px;border-left: 8px solid blue">&nbsp;&nbsp;订单处理</span>
+                    <hr>
+                    <table class="table table-bordered" style="text-align: center">
+                        <tr>
+                            <th>订单号</th>
+                            <th>车型图片</th>
+                            <th>车型</th>
+                            <th>租期</th>
+                            <th>价格</th>
+                            <th>操作</th>
+                        </tr>
+                        <tr th:each="o : ${ordersList}">
+                            <td style="padding-top: 30px;" th:text="${o.orderId}"></td>
+                            <td><img src="http://zc1.zhuizhan.com/Uploads/Car/20170605/193640593542487b09c.jpg"
+                                     height="70px;" width="100px;"></td>
+                            <td style="padding-top: 30px;" th:text="${o.orderCarName}"></td>
+                            <td style="padding-top: 30px;" th:text="${o.day}"></td>
+                            <td style="padding-top: 30px;">￥<span th:text="${o.price}"></span></td>
+                            <td>
+                                <a th:href=@{/admin/return(orderId=${o.orderId})}><button class="btn btn-info" style="margin-top: 15px;">
+                                    还车确认
+                                </button></a>
+                                <a th:href=@{/admin/rent(orderId=${o.orderId})}><button class="btn btn-info" style="margin-top: 15px;">
+                                    允许租借
+                                </button></a>
+                                <a th:href=@{/order/gotoDetails(orderId=${o.orderId})}><button class="btn btn-info" style="margin-top: 15px;">
+                                    详细
+                                </button></a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 54px;"></div>
+    <hr>
+    <div class="row">
+        <div class="col-md-3" style="text-align: center">
+            <h5>租车预订说明</h5>
+            租车手续
+            <div style="height: 5px;"></div>
+            车辆租赁合同
+            <div style="height: 5px;"></div>
+            租车说明
+        </div>
+        <div class="col-md-3" style="text-align: center">
+            <h5>租车费用及结算</h5>
+            银行支付
+            <div style="height: 5px;"></div>
+            结算流程
+            <div style="height: 5px;"></div>
+            发票报销
+        </div>
+        <div class="col-md-3" style="text-align: center">
+            <h5>紧急事务处理</h5>
+            保险责任
+            <div style="height: 5px;"></div>
+            理赔说明
+        </div>
+        <div class="col-md-3" style="text-align: center">
+            <h5>会员管理</h5>
+            用户协议
+        </div>
+    </div>
+
+</div>
+<div style="height: 20px;"></div>
+<div style="background-color: #011328;height: 200px;margin-top: 30px;">
+    <div class="container">
+        <ul style="margin-top: 70px;">
+            <li>关于我们&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li>新闻中心&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li>加盟合作&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li>隐私保护&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li>联系我们</li>
+            <li class="pull-right" style="font-size: 25px;">
+                广药租车有限公司
+            </li>
+            <li style="display: block;margin-top: 30px">
+                广东药科大学第9小队
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

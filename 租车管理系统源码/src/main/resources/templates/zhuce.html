@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style type="text/css">
+        .form{background: rgba(255,255,255,0.2);width:400px;margin:120px auto;}
+        /*阴影*/
+        .fa{display: inline-block;top: 27px;left: 6px;position: relative;color: #ccc;}
+        input[type="text"],input[type="password"]{padding-left:26px;}
+        .checkbox{padding-left:21px;}
+    </style>å
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    <!--container-fluid表示自适应大小，container表示居中-->
+    <div class="container">
+        <!--定义顶部导航栏-->
+        <div class="navbar-header" >
+            <a class="navbar-brand" href="shouye.html">投票管理系统</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="form row">
+        <form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="register_form">
+            <div class="col-md-9"><h3 class="form-title" align="center">注册</h3></div>
+            <div class="col-sm-9 col-md-9">
+                <form action="@{/user/register}" method="post">
+                    <div class="form-group">
+                        <i class="fa fa-user fa-lg"></i>
+                        <input class="form-control required" type="text" placeholder="用户名" name="name" autofocus="autofocus"/>
+                    </div>
+                    <div class="form-group">
+                        <i class="fa fa-lock fa-lg"></i>
+                        <input class="form-control required" type="password" placeholder="密码" id="register_password" name="password"/>
+                    </div>
+                    <div class="form-group">
+                        <i class="fa fa-check fa-lg"></i>
+                        <input class="form-control required" type="password" placeholder="确认密码" name="rpassword"/>
+                    </div>
+                    <div class="form-group">
+                        <i class="fa fa-envelope fa-lg"></i>
+                        <input class="form-control eamil" type="text" placeholder="邮箱" name="email"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success pull-left" value="确认 "/>
+                        <a href="/first"><input type="button" class="btn btn-info pull-right" id="back_btn" value="返回"/></a>
+                    </div>
+                </form>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

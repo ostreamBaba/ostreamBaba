@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+        .form{background: rgba(255,255,255,0.2);width:400px;margin:120px auto;}
+        /*阴影*/
+        .fa{display: inline-block;top: 27px;left: 6px;position: relative;color: #ccc;}
+        input[type="text"],input[type="password"]{padding-left:26px;}
+        .checkbox{padding-left:21px;}
+    </style>å
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    <!--container-fluid表示自适应大小，container表示居中-->
+    <div class="container">
+        <!--定义顶部导航栏-->
+        <div class="navbar-header" >
+            <a class="navbar-brand" href="/first">投票管理系统</a>
+        </div>
+    </div>
+</nav>
+
+<script>
+    function isEmpty(id){
+        var msg=$('#'+id).val();
+        if(msg === ''){
+            if(id === "name"){
+                $('#nameError').text("用户名不能为空");
+            }else if(id === 'password'){
+                $('#passwordError').text("密码不能为空");
+            }else if(id === 'password1'){
+                $('#passwordErrorAgain').text("密码不能为空");
+            }else{
+                $('#emailError').text("邮箱不能为空");
+            }
+        }else{
+            if(id === "name"){
+                $('#nameError').text(" ");
+            }else if(id === 'password'){
+                $('#passwordError').text(" ");
+            }else if(id === 'password1'){
+                $('#passwordErrorAgain').text(" ");
+            }else{
+                $('#emailError').text(" ");
+            }
+        }
+        if(id === 'password1'&& msg !== ''){
+            var check=$('#password').val();
+            if(msg !== check){
+                $('#passwordErrorAgain').text("两次密码不同");
+            }else{
+                $('#passwordErrorAgain').text(" ");
+            }
+        }
+    }
+</script>
+
+<div class="container">
+    <div class="form row">
+        <form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="register_form"
+              th:action="@{/user/register}" th:method="post">
+            <div class="col-md-9"><h3 class="form-title" align="center">注册</h3></div>
+            <div class="col-sm-9 col-md-9">
+                    <div class="form-group">
+                        <i class="fa fa-user fa-lg"></i>
+                        <input class="form-control required" type="text" placeholder="用户名" id="name" name="name" autofocus="autofocus"
+                        onblur="isEmpty(this.id)">
+                        <span id="nameError" style="color:red;"></span>
+                    </div>
+                    <div class="form-group">
+                        <i class="fa fa-lock fa-lg"></i>
+                        <input class="form-control required" type="password" placeholder="密码" id="password" name="password"
+                        onblur="isEmpty(this.id)"/>
+                        <span id="passwordError" style="color:red;"></span>
+                    </div>
+                    <div class="form-group">
+                        <i class="fa fa-check fa-lg"></i>
+                        <input class="form-control required" type="password" placeholder="确认密码"  id="password1"
+                        onblur="isEmpty(this.id)"/>
+                        <span id="passwordErrorAgain" style="color:red;"></span>
+                    </div>
+                    <div class="form-group">
+                        <i class="fa fa-envelope fa-lg"></i>
+                        <input class="form-control email" type="text" placeholder="邮箱" name="email" id="email"
+                        onblur="isEmpty(this.id)"/>
+                        <span id="emailError" style="color:red;"></span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success pull-left">注册
+                        </button>
+                        <a href="shouye.html"><input type="button" class="btn btn-info pull-right" id="back_btn" value="返回"/></a>
+                    </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
